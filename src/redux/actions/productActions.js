@@ -7,7 +7,6 @@ export function loadProductSuccess(product) {
 }
 
 export function loadProduct() {
-    debugger
   return function(dispatch) {
     dispatch(beginApiCall());
     return productApi
