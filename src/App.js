@@ -5,13 +5,13 @@ import HomePage from "./pages/HomePage";
 
 function App() {
   return (
-    <>
+    <div className="container mx-auto">
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={HomePage} />
         </Switch>
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 
