@@ -1,17 +1,27 @@
 import { useState } from "react";
+import Quantity from "./Quantity";
 
-const Cards = ({ product }) => {
+const Cards = ({ product, handleAddToCart }) => {
   const [showModal, setShowModal] = useState(false);
+  const [count, setCount] = useState(0);
+
+  const increment = () => {
+    setCount(count + 1);
+  };
+
+  const decrement = () => {
+    if (count > 0) {
+      setCount(count - 1);
+    }
+  };
 
   return (
     <>
       <div className="group relative" onClick={() => setShowModal(true)}>
         <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
-          <img
-            src={product.image}
-            alt="image"
-            className="w-full h-full object-center object-cover lg:w-full lg:h-full"
-          />
+          <img src={product.image}
+            alt={product.title}
+            className="w-full h-full object-center object-cover lg:w-full lg:h-full" />
         </div>
         <div className="mt-4 flex justify-between">
           <div>
@@ -49,7 +59,7 @@ const Cards = ({ product }) => {
                     <div className="w-full p-3">
                       <img
                         src={product.image}
-                        alt="image"
+                        alt={product.title}
                         className="w-full h-full object-center object-cover lg:w-full lg:h-full"
                       />
                     </div>
@@ -57,6 +67,10 @@ const Cards = ({ product }) => {
                       <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
                         {product.description}
                       </p>
+                      <Quantity
+                      count={count}
+                      increment={increment}
+                      decrement={decrement} />
                     </div>
                   </div>
                 </div>
@@ -70,10 +84,12 @@ const Cards = ({ product }) => {
                     Close
                   </button>
                   <button
-                    className="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    className={`bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 ${count > 0 ? "" : " opacity-50 pointer-events-none"}`}
                     type="button"
-                    onClick={() => setShowModal(false)}
-                  >
+                    onClick={() => {
+                        handleAddToCart(product.id, count);
+                        setShowModal(false)
+                    }}>
                     Add to cart
                   </button>
                 </div>

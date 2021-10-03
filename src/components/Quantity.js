@@ -1,19 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 
-const Quantity = () => {
-  const [count, setCount] = useState(0);
-
-  const increment = () => {
-    setCount(count + 1);
-  };
-
-  const decrement = () => {
-    if (count > 0) {
-      setCount(count - 1);
-    }
-  };
-
+const Quantity = ({count, decrement, increment}) => {
+  
   return (
     <div>
       <p>Set the quantity</p>
