@@ -5,22 +5,21 @@ const Quantity = ({count, decrement, increment}) => {
   
   return (
     <div>
-      <p>Set the quantity</p>
       <div className="flex justify-center items-center">
         <button
-          className="p-2 w-10 bg-gray-300 text-purple-600 text-center cursor-pointer"
+          className="p-2 w-10 bg-green-600 text-white text-center font-extrabold cursor-pointer rounded-l-full border-green-600 border hover:bg-transparent hover:text-green-600 hover:shadow-lg ease-linear transition-all duration-150"
           onClick={decrement}
         >
           &mdash;
         </button>
         <input
-          className="outline-none select-none text-2xl p-2 w-10 text-center"
+          className="outline-none select-none p-2 w-10 text-center border-green-600 border pointer-events-none"
           type="text"
           value={count}
           readonly
         />
         <button
-          className="p-2 w-10 bg-gray-300 text-purple-600 text-center cursor-pointer"
+          className="p-2 w-10 bg-green-600 text-white text-center font-extrabold cursor-pointer rounded-r-full border-green-600 border hover:bg-transparent hover:text-green-600 hover:shadow-lg ease-linear transition-all duration-150"
           onClick={increment}
         >
           &#xff0b;

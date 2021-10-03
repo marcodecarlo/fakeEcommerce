@@ -1,0 +1,11 @@
+.title{
+   @apply font-mono text-5xl font-black tracking-wider text-green-600 uppercase;
+}
+
+.btn-primary{
+  @apply bg-green-500 text-white  font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150;
+}
+
+.btn-close{
+  @apply bg-transparent text-current font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1;
+}
