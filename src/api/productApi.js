@@ -1,7 +1,7 @@
 import { handleResponse, handleError } from "./apiUtils";
 
 export function getProducts() {
-  return fetch("https://fakestoreapi.com//products")
+  return fetch("https://fakestoreapi.com/products")
     .then(handleResponse)
     .catch(handleError);
 }
