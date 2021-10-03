@@ -6,6 +6,7 @@ import Spinner from "../components/Spinner";
 
 import * as productActions from "../redux/actions/productActions";
 import * as cartActions from "../redux/actions/cartActions";
+import ShoppingCart from "../components/ShoppingCart";
 
 const HomePage = ({ loading, product, loadProduct, addToCart }) => {
   const [error, setError] = useState();
@@ -47,6 +48,7 @@ const HomePage = ({ loading, product, loadProduct, addToCart }) => {
             </div>
           ) : (
             <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 ">
+                <ShoppingCart />
               <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
                 I nostri prodotti
               </h2>
