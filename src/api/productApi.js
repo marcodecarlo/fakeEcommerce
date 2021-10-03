@@ -5,3 +5,9 @@ export function getProducts() {
     .then(handleResponse)
     .catch(handleError);
 }
+
+export function getProduct(id) {
+    return fetch("https://fakestoreapi.com/products/"+id)
+      .then(handleResponse)
+      .catch(handleError);
+  }

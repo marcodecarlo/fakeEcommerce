@@ -6,6 +6,10 @@ export function loadProductsSuccess(products) {
   return { type: types.LOAD_PRODUCTS_SUCCESS, products };
 }
 
+export function getProductSuccess(product) {
+    return { type: types.GET_PRODUCT_SUCCESS, product };
+  }
+
 export function loadProduct() {
   return function(dispatch) {
     dispatch(beginApiCall());
@@ -21,3 +25,18 @@ export function loadProduct() {
   };
 }
 
+
+export function readProduct(id) {
+    return function(dispatch) {
+      dispatch(beginApiCall());
+      return productApi
+        .getProduct(id)
+        .then(product => {
+          dispatch(getProductSuccess(product));
+        })
+        .catch(error => {
+          dispatch(apiCallError(error));
+          throw error;
+        });
+    };
+  }
