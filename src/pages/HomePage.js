@@ -8,7 +8,15 @@ import * as productActions from "../redux/actions/productActions";
 import * as cartActions from "../redux/actions/cartActions";
 import ShoppingCart from "../components/ShoppingCart";
 
-const HomePage = ({ loading, products, loadProduct, addToCart }) => {
+const HomePage = ({
+  loading,
+  cart,
+  products,
+  loadProduct,
+  addToCart,
+  readProduct,
+}) => {
+
   const [error, setError] = useState();
   const [shoppingCart, setShoppingCart] = useState({
     userId: 0,
@@ -23,16 +31,19 @@ const HomePage = ({ loading, products, loadProduct, addToCart }) => {
     });
   }, []);
 
+
   const handleAddToCart = (id, qty) => {
     let product = {
-        productId : id,
-        quantity : qty
-    }
+      productId: id,
+      quantity: qty,
+    };
     shoppingCart.products.push(product);
-
     addToCart(shoppingCart).catch((error) => {
       setError(error);
+      console.log("error: ", error);
     });
+
+ 
   };
 
   return (
@@ -49,7 +60,7 @@ const HomePage = ({ loading, products, loadProduct, addToCart }) => {
             </div>
           ) : (
             <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 ">
-                <ShoppingCart />
+              <ShoppingCart />
               <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
                 I nostri prodotti
               </h2>
@@ -69,7 +80,7 @@ const HomePage = ({ loading, products, loadProduct, addToCart }) => {
 };
 
 function mapStateToProps(state) {
-    return {
+  return {
     products: state.products,
     cart: state.cart,
     loading: state.apiCallsInProgress > 0,
@@ -79,6 +90,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = (dispatch) => ({
   loadProduct: bindActionCreators(productActions.loadProduct, dispatch),
   addToCart: bindActionCreators(cartActions.addToCart, dispatch),
+  readProduct: bindActionCreators(productActions.readProduct, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
