@@ -5,8 +5,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as productActions from "../redux/actions/productActions";
+import Spinner from "./Spinner";
 
-const ShoppingCart = ({ products, cart, readProduct }) => {
+const ShoppingCart = ({loading, products, cart, readProduct }) => {
   const [show, setShow] = useState(false);
   const [productCart, setProductCart] = useState([]);
 
@@ -14,7 +15,7 @@ const ShoppingCart = ({ products, cart, readProduct }) => {
     if (Object.keys(cart.products).length > 0) {
       cart.products.forEach(function (element) {
         let productList = products.inCart.filter(
-          (item) => item.id == element.productId
+          (item) => item.id === element.productId
         );
         if (productList.length <= 0) {
           setProductCart([...productCart, element]);
@@ -41,6 +42,10 @@ const ShoppingCart = ({ products, cart, readProduct }) => {
   };
 
   return (
+      <>
+    {loading ? (
+        <Spinner />
+      ) : (
     <div className="absolute top-20 right-12 z-50">
       <button
         className="bg-trasparent text-green-600 rounded-full h-10 w-10 flex items-center justify-center fixed top-6 right-12 border-green-600 border"
@@ -71,10 +76,10 @@ const ShoppingCart = ({ products, cart, readProduct }) => {
 
               <div className="flow-root">
                 {products.inCart.length > 0 ? (
-                  <ul role="list" className="my-1 divide-y divide-gray-200">
+                  <ul className="my-1 divide-y divide-gray-200">
                     {products.inCart.length > 0 &&
                       products.inCart.map((ele, index) => (
-                        <li className="py-6 flex">
+                        <li className="py-6 flex" key={ele.id}>
                           <div className="flex-shrink-0 w-24 h-24 border border-gray-200 rounded-md overflow-hidden">
                             <img
                               src={ele.image}
@@ -87,7 +92,7 @@ const ShoppingCart = ({ products, cart, readProduct }) => {
                             <div>
                               <div className="flex justify-between text-base font-medium text-gray-900">
                                 <h3>
-                                  <a href="#">{ele.title}</a>
+                                  {ele.title}
                                 </h3>
                                 <p className="ml-4">{ele.price}</p>
                               </div>
@@ -119,12 +124,9 @@ const ShoppingCart = ({ products, cart, readProduct }) => {
                   Shipping and taxes calculated at checkout.
                 </p>
                 <div className="mt-6">
-                  <a
-                    href="#"
-                    className="flex justify-center items-center px-6 py-3 btn-primary"
-                  >
+                  <button className="flex justify-center items-center px-6 py-3 btn-primary opacity-50 pointer-events-none w-full">
                     Checkout
-                  </a>
+                  </button>
                 </div>
               </div>
             )}
@@ -132,6 +134,8 @@ const ShoppingCart = ({ products, cart, readProduct }) => {
         </div>
       ) : null}
     </div>
+    )}
+    </>
   );
 };
 

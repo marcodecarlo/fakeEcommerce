@@ -14,15 +14,9 @@ const HomePage = ({
   products,
   loadProduct,
   addToCart,
-  readProduct,
 }) => {
 
   const [error, setError] = useState();
-  const [shoppingCart, setShoppingCart] = useState({
-    userId: 0,
-    date: new Date().toISOString().split("T")[0],
-    products: [],
-  });
 
   useEffect(() => {
     loadProduct().catch((error) => {
@@ -33,11 +27,16 @@ const HomePage = ({
 
 
   const handleAddToCart = (id, qty) => {
-    let product = {
-      productId: id,
-      quantity: qty,
-    };
-    shoppingCart.products.push(product);
+      let shoppingCart ={
+        userId: 0,
+        date: new Date().toISOString().split("T")[0],
+        products: [
+            {
+                productId: id,
+                quantity: qty,
+              }
+        ],
+      }
     addToCart(shoppingCart).catch((error) => {
       setError(error);
       console.log("error: ", error);
@@ -68,7 +67,7 @@ const HomePage = ({
               <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                 {products &&
                   products.all.map((ele, index) => (
-                    <Cards product={ele} handleAddToCart={handleAddToCart} />
+                    <Cards product={ele} handleAddToCart={handleAddToCart} key={ele.id}/>
                   ))}
               </div>
             </div>
@@ -89,8 +88,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = (dispatch) => ({
   loadProduct: bindActionCreators(productActions.loadProduct, dispatch),
-  addToCart: bindActionCreators(cartActions.addToCart, dispatch),
-  readProduct: bindActionCreators(productActions.readProduct, dispatch),
+  addToCart: bindActionCreators(cartActions.addToCart, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

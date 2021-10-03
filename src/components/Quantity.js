@@ -16,7 +16,7 @@ const Quantity = ({count, decrement, increment}) => {
           className="outline-none select-none p-2 w-10 text-center border-green-600 border pointer-events-none"
           type="text"
           value={count}
-          readonly
+          readOnly
         />
         <button
           className="p-2 w-10 bg-green-600 text-white text-center font-extrabold cursor-pointer rounded-r-full border-green-600 border hover:bg-transparent hover:text-green-600 hover:shadow-lg ease-linear transition-all duration-150"

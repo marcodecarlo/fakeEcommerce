@@ -47,7 +47,7 @@ const Cards = ({ product, handleAddToCart }) => {
                 </div>
                 {/*body*/}
                 <div className="relative p-3 flex-auto">
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="w-full p-3">
                       <img
                         src={product.image}
