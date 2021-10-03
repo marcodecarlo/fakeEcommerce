@@ -8,7 +8,7 @@ import * as productActions from "../redux/actions/productActions";
 import * as cartActions from "../redux/actions/cartActions";
 import ShoppingCart from "../components/ShoppingCart";
 
-const HomePage = ({ loading, product, loadProduct, addToCart }) => {
+const HomePage = ({ loading, products, loadProduct, addToCart }) => {
   const [error, setError] = useState();
   const [shoppingCart, setShoppingCart] = useState({
     userId: 0,
@@ -19,6 +19,7 @@ const HomePage = ({ loading, product, loadProduct, addToCart }) => {
   useEffect(() => {
     loadProduct().catch((error) => {
       setError(error);
+      console.log("error: ", error);
     });
   }, []);
 
@@ -54,8 +55,8 @@ const HomePage = ({ loading, product, loadProduct, addToCart }) => {
               </h2>
 
               <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                {product &&
-                  product.map((ele, index) => (
+                {products &&
+                  products.all.map((ele, index) => (
                     <Cards product={ele} handleAddToCart={handleAddToCart} />
                   ))}
               </div>
@@ -68,8 +69,8 @@ const HomePage = ({ loading, product, loadProduct, addToCart }) => {
 };
 
 function mapStateToProps(state) {
-  return {
-    product: state.product,
+    return {
+    products: state.products,
     cart: state.cart,
     loading: state.apiCallsInProgress > 0,
   };

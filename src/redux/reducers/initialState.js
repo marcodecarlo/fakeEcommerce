@@ -1,5 +1,8 @@
 export default {
   cart: [],
-  product: [],
+  products: {
+    all : [],
+    read : null,
+  },
   apiCallsInProgress: 0,
 };

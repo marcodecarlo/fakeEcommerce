@@ -2,8 +2,8 @@ import * as types from "./actionTypes";
 import * as productApi from "../../api/productApi";
 import { beginApiCall, apiCallError } from "./apiStatusActions";
 
-export function loadProductSuccess(product) {
-  return { type: types.LOAD_PRODUCT_SUCCESS, product };
+export function loadProductsSuccess(products) {
+  return { type: types.LOAD_PRODUCTS_SUCCESS, products };
 }
 
 export function loadProduct() {
@@ -12,7 +12,7 @@ export function loadProduct() {
     return productApi
       .getProducts()
       .then(products => {
-        dispatch(loadProductSuccess(products));
+        dispatch(loadProductsSuccess(products));
       })
       .catch(error => {
         dispatch(apiCallError(error));
