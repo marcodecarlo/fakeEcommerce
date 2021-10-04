@@ -14,9 +14,11 @@ const HomePage = ({
   products,
   loadProduct,
   addToCart,
+  readProduct
 }) => {
 
-  const [error, setError] = useState();
+  const [error, setError] = useState(false);
+  const [shoppingCart, setShoppingCart] = useState([])
 
   useEffect(() => {
     loadProduct().catch((error) => {
@@ -24,6 +26,19 @@ const HomePage = ({
       console.log("error: ", error);
     });
   }, []);
+
+  useEffect(() => {
+    if (Object.keys(cart.products).length > 0) {
+      cart.products.forEach(function (element) {
+          readProduct(element.productId).catch((error) => {
+            console.log("error ", error);
+          });
+      });
+    }
+  }, [cart.products]);
+
+
+  
 
 
   const handleAddToCart = (id, qty) => {
@@ -59,7 +74,7 @@ const HomePage = ({
             </div>
           ) : (
             <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 ">
-              <ShoppingCart />
+              <ShoppingCart products={cart.buying} />
               <h2 className="title">
                 Our store
               </h2>
@@ -88,7 +103,8 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = (dispatch) => ({
   loadProduct: bindActionCreators(productActions.loadProduct, dispatch),
-  addToCart: bindActionCreators(cartActions.addToCart, dispatch)
+  addToCart: bindActionCreators(cartActions.addToCart, dispatch),
+  readProduct: bindActionCreators(cartActions.readProduct, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

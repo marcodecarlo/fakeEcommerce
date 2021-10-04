@@ -7,9 +7,7 @@ export default function productReducer(state = initialState.products, action) {
     case types.LOAD_PRODUCTS_SUCCESS:
         newState.all = action.products;
       return  newState;
-    case types.GET_PRODUCT_SUCCESS:
-        newState.inCart = [...newState.inCart,action.product];
-      return newState;
+
     default:
       return newState;
   }

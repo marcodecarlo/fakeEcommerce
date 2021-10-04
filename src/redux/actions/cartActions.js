@@ -21,3 +21,21 @@ export function addToCart(carts) {
   };
 }
 
+export function getProductSuccess(product) {
+  return { type: types.GET_PRODUCT_SUCCESS, product };
+}
+
+export function readProduct(id) {
+  return function(dispatch) {
+    dispatch(beginApiCall());
+    return cartApi
+      .getProduct(id)
+      .then(product => {
+        dispatch(getProductSuccess(product));
+      })
+      .catch(error => {
+        dispatch(apiCallError(error));
+        throw error;
+      });
+  };
+}

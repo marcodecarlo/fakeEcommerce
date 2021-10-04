@@ -4,10 +4,10 @@ export default {
     userId:null,
     date:null,
     products:[],
+    buying : [],
   },
   products: {
-    all : [],
-    inCart : [],
+    all : []
   },
   apiCallsInProgress: 0,
 };
